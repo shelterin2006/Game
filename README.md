@@ -28,7 +28,7 @@ cmake -B build
 cmake --build build
 ```
 
-#Run
+## Run
 ```bash
 cd Release
 ./game.exe
