@@ -31,6 +31,13 @@ add_executable(${PROJECT_NAME} main.cpp)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
+# Post-build command for Game: Copy executable to Release directory
+add_custom_command(TARGET Game POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/Release" # Create Release directory if not exists
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:Game>" "${CMAKE_SOURCE_DIR}/Release/" # Copy .exe file
+    COMMENT "Copying Game.exe to ${CMAKE_SOURCE_DIR}/Release"
+)
+
 # Web Configurations
 if (${PLATFORM} STREQUAL "Web")
     set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html") # Tell Emscripten to build an example.html file.
