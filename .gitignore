@@ -1,0 +1,52 @@
+# Git Ignore File - Concise version
+
+# =====================================
+# Build and Compilation Artifacts
+# =====================================
+
+# Compiled executables and libraries
+# *.exe
+*.out
+*.dll
+*.so     # Also covers shared objects, though often used in Python context as well
+
+# Object files
+*.o
+*.obj
+
+# CMake generated build files and cache
+CMakeCache.txt
+CMakeFiles/
+
+# Build directories - Common names
+build/
+dist/
+bin/
+out/
+
+# Log files
+*.log
+
+# =====================================
+# IDE and Editor Specific Files
+# =====================================
+
+# JetBrains IDEs (IntelliJ, CLion, etc.)
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio User files (if you happen to use it sometimes)
+*.user
+
+# =====================================
+# Configuration and Sensitive Files
+# =====================================
+
+# Environment variables file (often contains sensitive info)
+.env
+
+# OS Specific Files (Optional, but good practice)
+.DS_Store # macOS
+Thumbs.db # Windows
