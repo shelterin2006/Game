@@ -27,7 +27,11 @@ endif()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} Source/main.cpp
+        Source/character.cpp
+        Source/character.h
+        Source/turn.cpp
+        Source/turn.h)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
