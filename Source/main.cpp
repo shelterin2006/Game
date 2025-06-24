@@ -2,7 +2,7 @@
 #include "character.h"
 #include  "raymath.h"
 #include "turn.h"
-
+#include "gamescreen.h"
 int screenWidth = 1280;
 int screenHeight = 720;
 string title = "Default Title";
@@ -16,8 +16,9 @@ int main()
     float scale = 0.05f;
     TurnState i = PLAYER_TURN;
     Texture2D c = LoadTexture("resources/1.jpeg");
-    character a = {10, {0, 200}};
-    character b = {7, {650, 200}};
+    Texture2D card = LoadTexture("resources/card.png");
+    character a = {10, {20, 200}};
+    character b = {7, {right(100, 1280), 200}};
     int f = 0;
     while (!WindowShouldClose())
     {
@@ -25,6 +26,8 @@ int main()
             ClearBackground(RAYWHITE);
             DrawTextureEx(c, a.point, 0.0f, scale ,WHITE);
             DrawTextureEx(c, b.point, 0.0f, scale ,WHITE);
+            DrawTextureV(card, {100, 100} ,WHITE);
+            DrawTextureV(card, {200, 200} ,WHITE);
             if (i == PLAYER_TURN) {
                 DrawText("tr", 55, 55, 20, BLACK);
             }
