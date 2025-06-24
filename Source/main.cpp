@@ -1,16 +1,18 @@
-#include <string>
+#include "readData.h"
 #include "character.h"
-#include "raylib.h"
 #include  "raymath.h"
 #include "turn.h"
-#include <iostream>
-using namespace std;
+
+int screenWidth = 1280;
+int screenHeight = 720;
+string title = "Default Title";
+int FrameRate = 60;
+
 int main()
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-    SetTargetFPS(60);
+    readData();
+    InitWindow(screenWidth, screenHeight, title.c_str());
+    SetTargetFPS(FrameRate);
     float scale = 0.05f;
     TurnState i = PLAYER_TURN;
     Texture2D c = LoadTexture("resources/1.jpeg");
