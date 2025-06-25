@@ -13,45 +13,54 @@ int main()
     readData();
     InitWindow(screenWidth, screenHeight, title.c_str());
     SetTargetFPS(FrameRate);
-    float scale = 0.05f;
     TurnState i = PLAYER_TURN;
-    Texture2D c = LoadTexture("resources/1.jpeg");
-    Texture2D card = LoadTexture("resources/card.png");
-    character a = {10, {20, 200}};
-    character b = {7, {right(100, 1280), 200}};
-    int f = 0;
+    GameScreen currentScreen = GAMEPLAY;
+    character a{10, {100, 100}, LoadTexture("resources/1.jpeg")};
+    character b{10, {500, 100}, LoadTexture("resources/1.jpeg")};
+    Card a1[2], b1[2];
+    for (int i = 0; i < 2; i++) {
+        a1[i].inputNoRec(LoadTexture("resources/card1.png"), 0.0f);
+        b1[i].inputNoRec(LoadTexture("resources/card1.png"), 0.0f);
+    }
+    ScreenGamePlay ga(a, b, a1, 2, b1, 2);
+    bool c = false, d = false;
     while (!WindowShouldClose())
     {
+        //Update
+        switch (currentScreen) {
+            case LOGO:
+                break; // load game
+            case TITLE:
+                screenTitle(); break;
+            case MAP:
+                break;
+            case GAMEPLAY:
+                if (ga.checkRec()) c = true; else c = false;
+                if (ga.isPressed()) d = true; else d = false;
+                break;
+            default: // ENDING
+                int s = 1;
+        }
+        //Draw
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            screenTitle();
-            // DrawTextureEx(c, a.point, 0.0f, scale ,WHITE);
-            // DrawTextureEx(c, b.point, 0.0f, scale ,WHITE);
-            // DrawTextureV(card, {100, 100} ,WHITE);
-            // DrawTextureV(card, {200, 200} ,WHITE);
-            // if (i == PLAYER_TURN) {
-            //     DrawText("tr", 55, 55, 20, BLACK);
-            // }
-            // else if (i == ENEMY_TURN) {
-            //     DrawText(std::to_string(a.hp).c_str(), 455, 55, 20, BLACK);
-            // }
-            // f++;
-            // if (f % 30 == 0) {
-            //     NextTurn(&i);
-            //     if (i == PLAYER_TURN) {
-            //         b.hp--;
-            //     }
-            //     else if (i == ENEMY_TURN) {
-            //         a.hp--;
-            //     }
-            // }
-            // DrawRectangle(10, 10, 100, 10, LIGHTGRAY);
-            // DrawRectangle(10, 10, (a.hp*100/10), 10, RED);
-            // DrawRectangle(600, 10, 100, 10, LIGHTGRAY);
-            // DrawRectangle(600, 10, (b.hp*100/8), 10, RED);
+            switch (currentScreen) {
+                case LOGO:
+                    break; // load game
+                case TITLE:
+                    screenTitle(); break;
+                case MAP:
+                    break;
+                case GAMEPLAY:
+                    ga.display();
+                    if (c) DrawText("1", 20, 20, 29, RED);
+                    if (d) DrawText("13", 50, 50, 32, BLACK);
+                    break;
+                default: // ENDING
+                    int s = 1;
+            }
         EndDrawing();
     }
     CloseWindow();
-    UnloadTexture(c);
     return 0;
 }

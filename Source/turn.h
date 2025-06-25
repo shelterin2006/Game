@@ -7,4 +7,4 @@ typedef enum TurnState {
     ENEMY_ACTION,
     GAME_OVER
 } TurnState;
-void NextTurn(TurnState *a);
+void NextTurn(TurnState *a, int hp1, int hp2);
