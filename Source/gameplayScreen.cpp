@@ -18,6 +18,7 @@ void ScreenGamePlay::deleteTexture2D() {
 
 void ScreenGamePlay::display() {
     DrawRectangleRec(returnHome, BLUE);
+    DrawText("Back", 0, 0, 20, BLACK);
     DrawTextureEx(c.image, c.point, 0.0f, 0.05f, WHITE);
     DrawTextureEx(e.image, e.point, 0.0f, 0.05f, WHITE);
     for (int i = 0; i < MAX_cardCharacter; i++) {

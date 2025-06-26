@@ -3,6 +3,7 @@
 #include "turn.h"
 #include "gameplayScreen.h"
 #include "title.h"
+#include "credits.h"
 int screenWidth = 1280;
 int screenHeight = 720;
 string title = "Default Title";
@@ -36,12 +37,15 @@ int main()
     ScreenGamePlay ga(a, b, a1, 2, b1, 2);
     bool c = false, d = false;
     Title manhinhchinh;
+    Credits cr;
     while (!WindowShouldClose())
     {
         //Update
         switch (currentScreen) {
             case LOGO:
                 break; // load game
+            case CREDITS:
+                cr.behavior(); break;
             case TITLE:
                 manhinhchinh.behavior(); break;
             case MAP:
@@ -57,6 +61,8 @@ int main()
             switch (currentScreen) {
                 case LOGO:
                     break; // load game
+                case CREDITS:
+                    cr.display(); break;
                 case TITLE:
                     manhinhchinh.display(); break;
                 case MAP:

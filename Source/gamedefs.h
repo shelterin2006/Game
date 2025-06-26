@@ -9,7 +9,7 @@
 using namespace std;
 
 typedef enum  {
-    LOGO, TITLE, MAP, GAMEPLAY, ENDING
+    LOGO, CREDITS, TITLE, MAP, GAMEPLAY, ENDING
 }GameScreen;
 typedef enum  {
     PLAYER_TURN,

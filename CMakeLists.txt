@@ -43,6 +43,8 @@ add_executable(${PROJECT_NAME} Source/main.cpp
         Source/utils.cpp
         Source/utils.h
         Source/gamedefs.h
+        Source/credits.cpp
+        Source/credits.h
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
