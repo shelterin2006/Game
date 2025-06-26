@@ -1,9 +1,9 @@
-#include "readData.h"
+#include "logo.h"
 
-void readData() {
+bool logo::readData() {
     ifstream in("resources/dataGame.txt");
     if (!in.is_open()) {
-        cerr << "Error"; return;
+        cerr << "Error"; return false;
     }
     string s;
     while (getline(in, s)) {
@@ -15,4 +15,12 @@ void readData() {
         if (t == "FPS:") ss >> FrameRate;
     }
     in.close();
+    return true;
 }
+
+void logo::display() {
+    float d = Utils::centered(l.width, screenWidth);
+    float e = Utils::centered(l.height, screenHeight);
+    DrawTexture(l, d, e, WHITE);
+}
+

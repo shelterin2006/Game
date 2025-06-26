@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib.h"
+#include "gamedefs.h"
 
 class Card {
 private:
@@ -11,7 +11,5 @@ public:
     float rotation, scaleSmall, scaleLarge;
     void inputNoRec(Texture2D a, float b);
     void drawCardScale(const float &a, const Vector2 &point) const;
-    void deleteTexture2D() const;
-    bool CheckRec();
-    bool IsPressed();
+    void freeTexture2D() const;
 };

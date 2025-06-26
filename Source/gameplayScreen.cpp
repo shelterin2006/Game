@@ -1,4 +1,4 @@
-#include "gamescreen.h"
+#include "gameplayScreen.h"
 
 ScreenGamePlay::ScreenGamePlay(character a, character b, Card a1[], int m, Card b1[], int n) {
     this->c = a, this->e = b;
@@ -11,18 +11,9 @@ ScreenGamePlay::ScreenGamePlay(character a, character b, Card a1[], int m, Card 
         cardEnemy[i] = b1[i];
 }
 void ScreenGamePlay::deleteTexture2D() {
-    c.deleteTexture2D(), e.deleteTexture2D();
-    for (int i = 0; i < MAX_cardCharacter; i++)
-        cardCharacter[i].deleteTexture2D();
-    for (int i = 0; i < MAX_cardEnemy; i++)
-        cardEnemy[i].deleteTexture2D();
-}
-
-float ScreenGamePlay::centered(float sizeIndex, float sizeWindow) {
-    return (sizeWindow / 2.0f) - (sizeIndex / 2.0f);
-}
-float ScreenGamePlay::right(float sizeIndex, float sizeWindow) {
-    return sizeWindow - 20.0f - sizeIndex;
+    c.freeTexture2D(), e.freeTexture2D();
+    Utils::freeTexture2D(cardCharacter, MAX_cardCharacter);
+    Utils::freeTexture2D(cardEnemy, MAX_cardEnemy);
 }
 
 void ScreenGamePlay::display() {
@@ -39,23 +30,12 @@ void ScreenGamePlay::display() {
     }
 }
 
-bool ScreenGamePlay::checkRec() const {
-    return CheckCollisionPointRec(GetMousePosition(), returnHome);
-}
-bool ScreenGamePlay::isPressed() const {
-    return checkRec() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-}
-
-void screenTitle() {
-    Rectangle button = {100, 100, 100, 100};
-    DrawRectangleRec(button, BLUE);
-    if (CheckCollisionPointRec(GetMousePosition(), button)) {
-        DrawText("1", 100, 100, 38, RED);
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            DrawText("2", 150, 150, 38, RED);
-        }
+void ScreenGamePlay::behavior() {
+    if (isPressed()) {
+        currentScreen = TITLE;
     }
 }
+
 
 // void gameplay() {
 //     float scale = 0.05f;

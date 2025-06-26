@@ -1,20 +1,31 @@
-#include "readData.h"
+#include "logo.h"
 #include "character.h"
-#include  "raymath.h"
 #include "turn.h"
-#include "gamescreen.h"
+#include "gameplayScreen.h"
+#include "title.h"
 int screenWidth = 1280;
 int screenHeight = 720;
 string title = "Default Title";
 int FrameRate = 60;
+GameScreen currentScreen = TITLE;
+
+// void loadLogo() {
+//     logo beg;
+//     while () {
+//         BeginDrawing();
+//         ClearBackground(RAYWHITE);
+//         beg.display();
+//         EndDrawing();
+//     }
+// }
 
 int main()
 {
-    readData();
+    logo::readData();
     InitWindow(screenWidth, screenHeight, title.c_str());
     SetTargetFPS(FrameRate);
+    // loadLogo();
     TurnState i = PLAYER_TURN;
-    GameScreen currentScreen = GAMEPLAY;
     character a{10, {100, 100}, LoadTexture("resources/1.jpeg")};
     character b{10, {500, 100}, LoadTexture("resources/1.jpeg")};
     Card a1[2], b1[2];
@@ -24,6 +35,7 @@ int main()
     }
     ScreenGamePlay ga(a, b, a1, 2, b1, 2);
     bool c = false, d = false;
+    Title manhinhchinh;
     while (!WindowShouldClose())
     {
         //Update
@@ -31,13 +43,11 @@ int main()
             case LOGO:
                 break; // load game
             case TITLE:
-                screenTitle(); break;
+                manhinhchinh.behavior(); break;
             case MAP:
                 break;
             case GAMEPLAY:
-                if (ga.checkRec()) c = true; else c = false;
-                if (ga.isPressed()) d = true; else d = false;
-                break;
+                ga.behavior(); break;
             default: // ENDING
                 int s = 1;
         }
@@ -48,13 +58,11 @@ int main()
                 case LOGO:
                     break; // load game
                 case TITLE:
-                    screenTitle(); break;
+                    manhinhchinh.display(); break;
                 case MAP:
                     break;
                 case GAMEPLAY:
                     ga.display();
-                    if (c) DrawText("1", 20, 20, 29, RED);
-                    if (d) DrawText("13", 50, 50, 32, BLACK);
                     break;
                 default: // ENDING
                     int s = 1;
