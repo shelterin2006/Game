@@ -10,16 +10,6 @@ string title = "Default Title";
 int FrameRate = 60;
 GameScreen currentScreen = TITLE;
 
-// void loadLogo() {
-//     logo beg;
-//     while () {
-//         BeginDrawing();
-//         ClearBackground(RAYWHITE);
-//         beg.display();
-//         EndDrawing();
-//     }
-// }
-
 int main()
 {
     logo::readData();
@@ -27,12 +17,16 @@ int main()
     SetTargetFPS(FrameRate);
     // loadLogo();
     TurnState i = PLAYER_TURN;
-    character a{10, {100, 100}, LoadTexture("resources/1.jpeg")};
-    character b{10, {500, 100}, LoadTexture("resources/1.jpeg")};
+    Image test = LoadImage("resources/IDLE.png");
+    Image attack = LoadImage("resources/ATTACK_1.png");
+    character a(10, {100, 100}, test, attack);
+    character b(10, {500, 100}, test, attack);
     Card a1[2], b1[2];
     for (int i = 0; i < 2; i++) {
-        a1[i].inputNoRec(LoadTexture("resources/card1.png"), 0.0f);
-        b1[i].inputNoRec(LoadTexture("resources/card1.png"), 0.0f);
+        Vector2 p = {50 + static_cast<float>(i) * 50.0f, 500};
+        Vector2 p2 = {900 + static_cast<float>(i) * 50.0f, 500};
+        a1[i].inputNoRec(LoadTexture("resources/card.png"), 0.0f, p);
+        b1[i].inputNoRec(LoadTexture("resources/card.png"), 0.0f, p2);
     }
     ScreenGamePlay ga(a, b, a1, 2, b1, 2);
     bool c = false, d = false;
