@@ -21,5 +21,6 @@ public:
     bool drawAttack();
     bool move(Vector2 target);
     void drawHp(Vector2 p) const;
-    bool isDied(){return hp <= 0.0f;}
+    bool isDied() const{return hp <= 0.0f;}
+    void truHP();
 };

@@ -51,3 +51,8 @@ void character::drawHp(const Vector2 p) const {
     DrawRectangleV(p, {100, 10}, LIGHTGRAY);
     DrawRectangleV(p, {f, 10}, RED);
 }
+
+void character::truHP() {
+    this->hp -= 1.0f;
+    if (hp < 0.0f) hp = 0.0f;
+}

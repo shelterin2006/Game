@@ -18,12 +18,14 @@ class ScreenGamePlay {
 private:
     int charUseCard, enemyUseCard;
     int MAX_cardCharacter, MAX_cardEnemy;
+    int nv, the;
     TurnState turn;
     character c[2]; //0 is hero, 1 is enemy
     Card card[21]; // 0-9 : hero, 10-19 enemy
     const Rectangle returnHome{0, 0, 100, 50};
     ActorState as;
     bool charTurn;
+
 public:
     ScreenGamePlay() {}
     ScreenGamePlay(character a, character b, Card a1[], int m, Card b1[], int n);
@@ -31,5 +33,5 @@ public:
     void display();
     bool checkRec() const {return Utils::checkRec(returnHome);}
     void behavior();
-    // void NextActor();
+    void nextActor();
 };

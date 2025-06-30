@@ -3,14 +3,15 @@
 ScreenGamePlay::ScreenGamePlay(character a, character b, Card a1[], int m, Card b1[], int n) {
     this->c[0] = a, this->c[1] = b;
     turn = PLAYER_TURN;
-    charUseCard = enemyUseCard = 0;
-    MAX_cardCharacter = m, MAX_cardEnemy = n;
+    charUseCard = 0, enemyUseCard = 10;
+    MAX_cardCharacter = m; MAX_cardEnemy = n + 10;
     for (int i = 0; i < MAX_cardCharacter; i++)
         card[i] = a1[i];
     for (int i = 0; i < MAX_cardEnemy; i++)
         card[i + 10] = b1[i];
     charTurn = true;
     as = CARD_MOVING;
+    nv = 0, the = 0;
 }
 
 void ScreenGamePlay::deleteTexture2D() {
@@ -22,45 +23,56 @@ void ScreenGamePlay::display() {
     //hp
     c[0].drawHp({10, 70});
     c[1].drawHp({1000, 70});
-
+    DrawText(to_string(as).c_str(), 500, 500, 30, RED);
+    DrawText(to_string(the).c_str(), 300, 300, 32, GRAY);
     DrawRectangleRec(returnHome, BLUE);
     DrawText("Back", 0, 0, 20, BLACK);
     c[0].drawAttack(); c[1].drawIdle();
-    Vector2 v = card[0].getPoint(); v.y -= 50;
-    for (int i = 0; i < MAX_cardCharacter; i++) {
-        Vector2 p = {50 + static_cast<float>(i) * 50.0f, 500};
-        card[i].move(v);
-        card[i].drawCardScale(0.02f);
-    }
-    for (int i = 0; i < MAX_cardEnemy; i++) {
-        Vector2 p = {900 + static_cast<float>(i) * 50.0f, 500};
-        card[i + 10].drawCardScale(0.02f);
-    }
+    for (int i = 0; i < MAX_cardCharacter; i++)
+        card[i].drawCard();
+    for (int i = 10; i < MAX_cardEnemy; i++)
+        card[i].drawCard();
 }
 
 void ScreenGamePlay::behavior() {
-    if (Utils::isPressed(returnHome)) {
+    if (Utils::isPressed(returnHome) || c[0].isDied() || c[1].isDied()) {
         currentScreen = TITLE; return;
     }
-    int f = (charTurn ? charUseCard : enemyUseCard);
-    Vector2 v = card[f].getPoint(); v.y -= 50;
     switch (as) {
         case CARD_MOVING:
-            if (card[f].checkMove()) {
-                card[f].setLargePoint();
+            if (card[the].checkMove()) {
+                card[the].setLargePoint();
                 as = CARD_LARGE;
-            } else
-                card[f].move(v);
+            } else card[the].move();
             break;
         case CARD_LARGE:
-
-            // as = MOVING_TO_TARGET;
+            as = MOVING_TO_TARGET;
             break;
         case MOVING_TO_TARGET:
             as = PERFORMING_ACTION; break;
+        case PERFORMING_ACTION:
+            as = RETURNING; break;
         case RETURNING:
-            as = TAKING_DAMAGE; break;
-        default:
+            c[nv].truHP();
             as = TAKING_DAMAGE;
+            break;
+        default:
+            card[the].resetPoint();
+            nextActor();
+            as = CARD_MOVING;
+    }
+}
+
+void ScreenGamePlay::nextActor() {
+    if (charTurn) {
+        charUseCard++;
+        if (charUseCard == MAX_cardCharacter)
+            charUseCard = 0;
+        charTurn = false, nv = 1, the = enemyUseCard;
+    } else {
+        enemyUseCard++;
+        if (enemyUseCard == MAX_cardEnemy)
+            enemyUseCard = 10;
+        charTurn = true, nv = 0, the = charUseCard;
     }
 }

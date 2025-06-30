@@ -25,8 +25,10 @@ int main()
     for (int i = 0; i < 2; i++) {
         Vector2 p = {50 + static_cast<float>(i) * 50.0f, 500};
         Vector2 p2 = {900 + static_cast<float>(i) * 50.0f, 500};
-        a1[i].inputNoRec(LoadTexture("resources/card.png"), 0.0f, p);
-        b1[i].inputNoRec(LoadTexture("resources/card.png"), 0.0f, p2);
+        Vector2 l1 = {100, 100}, l2 = {1100, 100};
+        float ss = 0.02f, sl = 0.03f;
+        a1[i].inputNoRec(LoadTexture("resources/card.png"), p, l1, ss, sl);
+        b1[i].inputNoRec(LoadTexture("resources/card.png"), p2, l2, ss, sl);
     }
     ScreenGamePlay ga(a, b, a1, 2, b1, 2);
     bool c = false, d = false;
@@ -43,6 +45,8 @@ int main()
             case TITLE:
                 manhinhchinh.behavior(); break;
             case MAP:
+                break;
+            case PICKCATD:
                 break;
             case GAMEPLAY:
                 ga.behavior(); break;
