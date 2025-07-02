@@ -11,16 +11,13 @@ void Title::display() const {
 }
 
 int Title::behavior() {
-    bool a = Utils::isPressed(howToPlay);
-    bool b = Utils::isPressed(play);
-    bool c = Utils::isPressed(credits);
-    if (a) {
+    if (Utils::isPressed(howToPlay)) {
         currentScreen = GAMEPLAY;
     }
-    if (b) {
-        currentScreen = GAMEPLAY;
+    if (Utils::isPressed(play)) {
+        currentScreen = PICKCATD;
     }
-    if (c) {
+    if (Utils::isPressed(credits)) {
         currentScreen = CREDITS;
     }
 }

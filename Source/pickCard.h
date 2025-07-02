@@ -6,8 +6,6 @@ private:
     int n, m;
     Card use[10], select[10];
     Rectangle playGame{}, back{};
-    Vector2 offset;
-    bool isDragging;
 
 public:
     pick()= default;

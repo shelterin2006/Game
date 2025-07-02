@@ -7,16 +7,11 @@ ScreenGamePlay::ScreenGamePlay(character a, character b, Card a1[], int m, Card 
     MAX_cardCharacter = m; MAX_cardEnemy = n + 10;
     for (int i = 0; i < MAX_cardCharacter; i++)
         card[i] = a1[i];
-    for (int i = 0; i < MAX_cardEnemy; i++)
-        card[i + 10] = b1[i];
+    for (int i = 10; i < MAX_cardEnemy; i++)
+        card[i] = b1[i - 10];
     charTurn = true;
     as = CARD_MOVING;
     nv = 0, the = 0;
-}
-
-void ScreenGamePlay::deleteTexture2D() {
-    c[0].freeTexture2D(), c[1].freeTexture2D();
-    Utils::freeTexture2D(card, MAX_cardCharacter);
 }
 
 void ScreenGamePlay::display() {

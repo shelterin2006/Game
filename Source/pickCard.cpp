@@ -1,11 +1,11 @@
 #include "pickCard.h"
 
-pick::pick(Card u[], int c, Card s[], int d) {
-    n = c, m = d;
-    for (int i = 0; i < n; i++) use[i] = u[i];
-    for (int i = 0; i < m; i++) select[i] = s[i];
-    isDragging = false;
-    offset = { 0.0f, 0.0f };
+pick::pick(Card a[], int n, Card b[], int m) {
+    this->n = n, this->m = m;
+    for (int i = 0; i < n; i++) use[i] = a[i];
+    for (int i = 0; i < m; i++) select[i] = b[i];
+    playGame = {1100, 650, 100, 60};
+    back = {0, 0, 100, 60};
 }
 
 void pick::behavior() {
@@ -19,43 +19,21 @@ void pick::behavior() {
     }
     for (int i = 0; i < n; i++) {
         if (Utils::isPressed(use[i])) {
-            updateCard(&use[i]);
-        } else if (Utils::isPressed(select[i])) {
-            updateCard(&select[i]);
+            use[i].updateCard();
         }
     }
-}
-
-#include "raylib.h"
-
-
-void pick::updateCard(Card *box)
-{
-    Vector2 mousePoint = GetMousePosition();
-    Rectangle b = box->getButton();
-    bool collision = CheckCollisionPointRec(mousePoint, b);
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && collision)
-    {
-        isDragging = true;
-        offset.x = mousePoint.x - b.x;
-        offset.y = mousePoint.y - b.y;
-    }
-    if (isDragging)
-    {
-        b.x = mousePoint.x - offset.x;
-        b.y = mousePoint.y - offset.y;
-        if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-        {
-            isDragging = false;
+    for (int i = 0; i < m; i++) {
+        if (Utils::isPressed(select[i])) {
+            select[i].updateCard();
         }
     }
-    box->updateButton(b);
 }
 
 void pick::display() {
     DrawRectangleRec(back, RED);
     DrawRectangleRec(playGame, ORANGE);
-
+    for (int i = 0; i < n; i++) use[i].drawCard();
+    for (int i = 0; i < m; i++) select[i].drawCard();
 }
 
 

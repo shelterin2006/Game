@@ -29,7 +29,6 @@ private:
 public:
     ScreenGamePlay() {}
     ScreenGamePlay(character a, character b, Card a1[], int m, Card b1[], int n);
-    void deleteTexture2D();
     void display();
     bool checkRec() const {return Utils::checkRec(returnHome);}
     void behavior();
