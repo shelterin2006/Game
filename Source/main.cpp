@@ -23,7 +23,7 @@ int main()
     character b(10, {500, 100}, test, attack);
     // Load texture một lần duy nhất
     Texture2D cardTexture = LoadTexture("resources/card.png");
-    
+
     Card a1[2], b1[2];
     for (int i = 0; i < 2; i++) {
         Vector2 p = {50 + static_cast<float>(i) * 50.0f, 500};
@@ -79,12 +79,12 @@ int main()
             }
         EndDrawing();
     }
-    
+
     // Unload textures trước khi đóng window
     UnloadTexture(cardTexture);
     UnloadImage(test);
     UnloadImage(attack);
-    
+
     CloseWindow();
     return 0;
 }

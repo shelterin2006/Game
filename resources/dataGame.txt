@@ -1,4 +1,4 @@
 width: 1280
 height: 720
 title: Honkai Impact 3rd - Before the Endless Dream Ends
-FPS: 60
+FPS: 120

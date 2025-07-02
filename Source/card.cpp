@@ -66,29 +66,23 @@ void Card::setLargePoint() {
 // void Card::updatePoint(Rectangle b) {
 //     current_point =
 // }
-void Card::updateCard()
-{
+void Card::updateCard() {
     Vector2 mousePoint = GetMousePosition();
-    Rectangle b = {current_point.x, current_point.y, 100, 100};
-    bool collision = CheckCollisionPointRec(mousePoint, b);
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && collision)
-    {
-        cout << 14312412 << endl;
-        isDragging = true;
-        offset.x = mousePoint.x - b.x;
-        offset.y = mousePoint.y - b.y;
-    }
-    if (isDragging)
-    {
-        if (IsMouseButtonUp(MOUSE_BUTTON_LEFT))
-        {
-            isDragging = false;
+    Rectangle bounds = {current_point.x, current_point.y, 100, 150};
+    if (CheckCollisionPointRec(mousePoint, bounds) && IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        if (!isDragging) {
+            offset.x = mousePoint.x - current_point.x;
+            offset.y = mousePoint.y - current_point.y;
+            std::cout << "Bắt đầu kéo! " << isDragging << std::endl;
         }
-        else // Nếu chuột vẫn đang được nhấn giữ
-        {
-            // Chỉ di chuyển vật thể nếu chuột chưa được thả ra.
-            current_point.x = mousePoint.x;
-            current_point.y = mousePoint.y;
+        isDragging = true;
+    }
+    if (isDragging) {
+        current_point.x = mousePoint.x - offset.x;
+        current_point.y = mousePoint.y - offset.y;
+        if (IsMouseButtonUp(MOUSE_BUTTON_LEFT)) {
+            isDragging = false;
+            std::cout << "Dừng kéo!" << std::endl;
         }
     }
 }

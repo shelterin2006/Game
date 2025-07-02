@@ -18,14 +18,10 @@ void pick::behavior() {
         return;
     }
     for (int i = 0; i < n; i++) {
-        if (Utils::isPressed(use[i])) {
-            use[i].updateCard();
-        }
+        use[i].updateCard();
     }
     for (int i = 0; i < m; i++) {
-        if (Utils::isPressed(select[i])) {
-            select[i].updateCard();
-        }
+        select[i].updateCard();
     }
 }
 
