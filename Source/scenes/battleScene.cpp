@@ -137,14 +137,18 @@ void BattleScene::update(Game& game) {
                 currentAction.action->Execute(*game.player, *game.enemy);
                 game.player->getAnimation()->Play();
                 // if (game.player->currentAnimation == "")
-                if (game.player->currentAnimation.find("ATTACK") != string::npos)
+                if (game.player->currentAnimation.find("ATTACK") != string::npos) {
                     game.player->MoveTo(game.enemy->point, 0.1f * 7);
+                    cout << "text : " << game.player->currentAnimation << endl;
+                }
             } else {
                 game.enemy->currentAnimation = currentAction.action->GetAnimationKey();
                 currentAction.action->Execute(*game.enemy, *game.player);
                 game.enemy->getAnimation()->Play();
-                if (game.enemy->currentAnimation.find("ATTACK") != string::npos)
-                    game.enemy->MoveTo(game.enemy->point, 0.1f * 7);
+                if (game.enemy->currentAnimation.find("ATTACK") != string::npos) {
+                    game.enemy->MoveTo(game.player->point, 0.1f * 7);
+                    cout << "text : " << game.enemy->currentAnimation << endl;
+                }
             }
             // 3. Chuyển sang trạng thái đợi animation
             currentState = BattleState::ANIMATING_ACTION;
@@ -198,7 +202,12 @@ void BattleScene::draw(Game& game) {
     game.player->Draw();
     game.enemy->Draw();
     DrawRectangleRec(back, RED);
-    DrawText("Back", 10, 10, 20, WHITE);
+    const char *playText = "Back";
+    int fontSize = 20;
+    int textWidth = MeasureText(playText, fontSize);
+    int textX = back.x + (back.width - textWidth) / 2;
+    int textY = back.y + (back.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(playText, textX, textY, fontSize, BLACK);
     DeckManager &d = DeckManager::getInstance();
     for (int i = 0; i < game.desk1.size(); i++) {
         float y = (id1[i] == cardPlay ? -100 : 0);

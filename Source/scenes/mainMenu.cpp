@@ -12,9 +12,20 @@ void MainMenuScene::onEnter(Game &game) {
 void MainMenuScene::draw(Game &game) {
     DrawTexture(bg, 0, 0, WHITE);
     DrawRectangleRec(play, BLUE);
-    DrawText("Play", Utils::centered(100, Resource::getInstance().screenWidth), 150, 20, BLACK);
+    const char *playText = "Play";
+    int fontSize = 20;
+    int textWidth = MeasureText(playText, fontSize);
+    int textX = play.x + (play.width - textWidth) / 2;
+    int textY = play.y + (play.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(playText, textX, textY, fontSize, BLACK);
+
+    // Ví dụ cho Credits
     DrawRectangleRec(credits, GREEN);
-    DrawText("Credits", Utils::centered(100, Resource::getInstance().screenWidth), 250, 20, BLACK);
+    const char *creditsText = "Credits";
+    textWidth = MeasureText(creditsText, fontSize);
+    textX = credits.x + (credits.width - textWidth) / 2;
+    textY = credits.y + (credits.height - fontSize) / 2;
+    DrawText(creditsText, textX, textY, fontSize, BLACK);
 }
 
 void MainMenuScene::update(Game &game) {

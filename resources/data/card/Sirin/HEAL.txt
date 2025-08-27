@@ -8,4 +8,4 @@ description=Gây 10 sát thương cho một kẻ địch.
 # Chỉ có một hành động
 action_1_type=HEAL
 action_1_value=7
-action_1_animation_key=CharSirinATTACK
+action_1_animation_key=CharSirinHEAL

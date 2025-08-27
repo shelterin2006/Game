@@ -12,11 +12,28 @@ void ChoseChar::onEnter(Game &game) {
 void ChoseChar::draw(Game &game) {
     DrawTexture(bg, 0, 0, WHITE);
     DrawRectangleRec(back, GRAY);
-    DrawText("back", Utils::centered(100, Resource::getInstance().screenWidth), 50, 20, BLACK);
+    const char *playText = "Back";
+    int fontSize = 20;
+    int textWidth = MeasureText(playText, fontSize);
+    int textX = back.x + (back.width - textWidth) / 2;
+    int textY = back.y + (back.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(playText, textX, textY, fontSize, BLACK);
+
     DrawRectangleRec(charSirin, BLUE);
-    DrawText("Sirin", Utils::centered(100, Resource::getInstance().screenWidth), 100, 20, BLACK);
+    const char *SirinText = "Sirin";
+    fontSize = 20;
+    textWidth = MeasureText(playText, fontSize);
+    textX = charSirin.x + (charSirin.width - textWidth) / 2;
+    textY = charSirin.y + (charSirin.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(SirinText, textX, textY, fontSize, BLACK);
+
     DrawRectangleRec(charTeriri, GREEN);
-    DrawText("Teriri", Utils::centered(100, Resource::getInstance().screenWidth), 150, 20, BLACK);
+    const char *TeririText = "Teriri";
+    fontSize = 20;
+    textWidth = MeasureText(playText, fontSize);
+    textX = charTeriri.x + (charTeriri.width - textWidth) / 2;
+    textY = charTeriri.y + (charTeriri.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(TeririText, textX, textY, fontSize, BLACK);
 }
 
 void ChoseChar::update(Game &game) {

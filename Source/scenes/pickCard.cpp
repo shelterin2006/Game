@@ -45,11 +45,20 @@ void PickCardScene::update(Game& game) {
 void PickCardScene::draw(Game& game) {
     DrawTexture(bg, 0, 0, WHITE);
     DrawRectangleRec(back, RED);
-    DrawText("Back", 10, 10, 20, WHITE);
+    const char *playText = "Back";
+    int fontSize = 20;
+    int textWidth = MeasureText(playText, fontSize);
+    int textX = back.x + (back.width - textWidth) / 2;
+    int textY = back.y + (back.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(playText, textX, textY, fontSize, BLACK);
     DrawRectangleRec(playGame, ORANGE);
     DrawRectangleRec(random, BLUE);
     DrawText(("Random " + to_string(numRandom)).c_str(), 10, 650, 20, WHITE);
-    DrawText("Play", 1110, 660, 20, WHITE);
+    const char *Text = "Play";
+    textWidth = MeasureText(playText, fontSize);
+    textX = playGame.x + (playGame.width - textWidth) / 2;
+    textY = playGame.y + (playGame.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(Text, textX, textY, fontSize, BLACK);
     for (int i = 0; i < 5; i++) {
         DeckManager::getInstance().GetCardByID(game.desk1[i])->Draw(point[i], 0.07f);
     }

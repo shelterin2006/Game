@@ -13,7 +13,12 @@ void Credits::onEnter(Game &game) {
 void Credits::draw(Game &game) {
     DrawTexture(bg, 0, 0, WHITE);
     DrawRectangleRec(back, GRAY);
-    DrawText("Back", 0, 0, 20, BLACK);
+    const char *playText = "Back";
+    int fontSize = 20;
+    int textWidth = MeasureText(playText, fontSize);
+    int textX = back.x + (back.width - textWidth) / 2;
+    int textY = back.y + (back.height - fontSize) / 2; // căn giữa theo chiều dọc
+    DrawText(playText, textX, textY, fontSize, BLACK);
     DrawText("Open source: ", 200, 200, 40, BLACK);
     DrawText("https://github.com/shelterin2006/Game", 200, 250, 40, BLACK);
 }

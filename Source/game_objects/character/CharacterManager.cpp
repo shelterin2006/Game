@@ -29,7 +29,7 @@ void CharacterManager::loadChar() {
             string t = "Char" + folderName + tex;
             m_characters[folderName]->animations[t] =
                 make_unique<Animation>(t, frame, 0.25f, d);
-            cout << t << ' ';
+            cout << "a: " << t << '\n';
         } cout << endl;
         pngFile.close();
     }
