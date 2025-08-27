@@ -1,0 +1,11 @@
+# Lá bài tấn công cơ bản
+Char=TeRiRi
+name=CardTeRiRiATTACK
+cost=1
+display_name=Chém
+description=Gây 10 sát thương cho một kẻ địch.
+
+# Chỉ có một hành động
+action_1_type=DAMAGE
+action_1_value=10
+action_1_animation_key=CharTeRiRiATTACK

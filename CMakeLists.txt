@@ -27,27 +27,53 @@ endif()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} Source/main.cpp
-        Source/character.cpp
-        Source/character.h
-        Source/turn.cpp
-        Source/turn.h
-        Source/card.cpp
-        Source/card.h
-        Source/logo.cpp
-        Source/logo.h
-        Source/gameplayScreen.cpp
-        Source/gameplayScreen.h
-        Source/title.cpp
-        Source/title.h
-        Source/utils.cpp
-        Source/utils.h
-        Source/gamedefs.h
-        Source/credits.cpp
-        Source/credits.h
-        Source/pickCard.cpp
-        Source/pickCard.h
+# =============================================================================
+# SỬ DỤNG HÀM TÙY CHỈNH
+# =============================================================================
+
+# Thay vì gọi add_executable(...)
+# hãy gọi hàm tùy chỉnh của chúng ta: project_add_executable(...)
+enable_testing()
+add_executable(${PROJECT_NAME}
+        Source/main.cpp
+        Source/game_objects/character/character.h
+        Source/cards/card.h
+        Source/scenes/mainMenu.cpp
+        Source/scenes/mainMenu.h
+        Source/utils/gamedefs.h
+        Source/scenes/credits.cpp
+        Source/scenes/credits.h
+        Source/scenes/pickCard.cpp
+        Source/scenes/pickCard.h
+        Source/core/Resource.cpp
+        Source/core/Resource.h
+        Source/core/scene.cpp
+        Source/core/scene.h
+        Source/scenes/battleScene.cpp
+        Source/scenes/battleScene.h
+        Source/game_objects/actions/IAction.h
+        Source/game_objects/actions/DamageAction.h
+        Source/cards/DeckManager.h
+        Source/cards/DeckManager.cpp
+        Source/game_objects/actions/IAction.h
+        Source/core/Animation.h
+        Source/scenes/ChoseChar.cpp
+        Source/scenes/ChoseChar.h
+        Source/game_objects/character/CharacterManager.h
+        Source/utils/Params.h
+        Source/game_objects/actions/HealAction.h
+        Source/cards/card.cpp
+        Source/game_objects/character/CharacterManager.cpp
 )
+add_test(NAME RunGameTest COMMAND ${PROJECT_NAME})
+
+# Đặt thư mục làm việc cho test case "RunGameTest"
+# Đây là phần sẽ được CLion và các công cụ khác tôn trọng
+set_property(
+        TEST RunGameTest
+        PROPERTY WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+)
+
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

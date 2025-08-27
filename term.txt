@@ -1,0 +1,16 @@
+Resource :
+    CardTeRiRiHEAL
+    CharSirinATTACK
+Character
+    string name : Sirin
+CharacterManager :
+    map<string character>
+        string : Sirin
+Card :
+    nameChar : Sirin
+    name : HEAL
+Card manager:
+    map<string, Car>
+        string : CardSirinATTACK
+IAction
+    key : CardSirinATTACK
